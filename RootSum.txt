@@ -1,0 +1,66 @@
+package com.nttdata.com;
+
+import java.util.ArrayList;
+
+public class RootSum {
+	Node root;
+static class Node{
+	int data;
+	Node left;
+	Node right;
+	public Node(int data){
+		this.data=data;
+		left=right=null;
+	}
+}
+RootSum() { 
+    root = null; 
+}
+
+public static void main(String[] args){
+	RootSum tree=new RootSum();
+	tree.root=new Node(5);
+	tree.root.left = new Node(4);
+    tree.root.right = new Node(8);
+    tree.root.left.left = new Node(11);
+    tree.root.left.left.left = new Node(7);
+    tree.root.left.left.right = new Node(2);
+
+    tree.root.right.left = new Node(13);
+    tree.root.right.right = new Node(4);
+    tree.root.right.right.left = new Node(5);
+    tree.root.right.right.right = new Node(1);
+
+     pathSum(tree.root,new ArrayList<Integer>(),22);
+    System.out.println(c);
+}
+static ArrayList<ArrayList<Integer>> c=new ArrayList<>();
+
+@SuppressWarnings("unchecked")
+private static void pathSum(Node root2, ArrayList<Integer> a, int i) {
+	// TODO Auto-generated method stub
+if(root2==null)
+	return ;
+
+if(root2.left==null&&root2.right==null&&root2.data==i){
+a.add(root2.data);
+
+	c.add((ArrayList<Integer>) a.clone());
+	a.remove(a.size()-1);
+
+return;
+}
+a.add(root2.data);
+	if(root2.left!=null){
+	pathSum(root2.left, a,i-root2.data);
+	}
+
+	if(root2.right!=null){
+		pathSum(root2.right,a, i-root2.data);
+	}
+	a.remove(a.size()-1);
+		
+}
+
+
+}
