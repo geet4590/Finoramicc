@@ -1,0 +1,59 @@
+package com.nttdata.com;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Power
+
+{
+
+    public static void main(String[] args)
+
+    {
+Scanner scan=new Scanner(System.in);
+int x=scan.nextInt();
+int y=scan.nextInt();
+int z=scan.nextInt();
+int ans=pow(x,y,z);
+System.out.println(ans);
+    }
+
+public static int pow(int x, int y, int d) {
+			 
+			if(x<0){
+				x=(x+d)%d;
+			}
+			 long ans=1;
+			 if(x==0){
+			     ans=0;
+			 }else {if(y==0){
+			    ans=1;
+			}
+			else if(y==1){
+			    ans=x;
+			}
+			         else{     long xx=x%d;
+                        while(y!=0){
+                          if((y&1)>=1){
+
+			                           ans=(ans*xx)%d;
+
+			                     }
+
+			                     xx=(xx*xx)%d;
+                         if(ans>d){
+                            ans=ans%d;
+
+			                     }
+
+			                     y=y/2;
+
+			              }}}
+				    return (int)ans;
+				}
+	}
+
+   
+
+

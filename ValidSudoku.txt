@@ -1,0 +1,102 @@
+package com.nttdata.com;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class ValidSudoku {
+public static void main(String args[]){
+	Scanner scan=new Scanner(System.in);
+	ArrayList<String> al=new ArrayList<>();
+	al.add("53..7....");
+	al.add("6..195...");
+	al.add(".98....6.");
+	al.add("8...6...3");
+	al.add("4..8.3..1");
+	al.add("7...2...6");
+	al.add(".6....28.");
+	al.add("...419..5");
+	al.add("....8..79");
+	al.add("53..7....");
+int r=isValidSudoku(al);
+System.out.println(r);
+}
+
+private static int isValidSudoku(ArrayList<String> al) {
+	// TODO Auto-generated method stub
+	HashSet<Integer> h=new HashSet<>();
+	boolean rv=true;
+	boolean cv=true;
+	
+//row validation
+	for(int i=0;i<9;i++){
+		String s=al.get(i);
+		for(int j=0;j<s.length();j++){
+			char x=s.charAt(j);
+			if(x!='.'){
+			int n=Character.getNumericValue(x);
+			if(h.contains(n)){
+				rv=false;
+				break;
+			}else{
+				h.add(n);
+			}
+			}
+		}
+		h.clear();
+	}
+	//col validation
+	int j=0;
+	if(rv==true){
+		for(int i=0;i<9;i++){
+		while(j<9){
+			String s=al.get(j);
+			char x=s.charAt(i);
+			if(x!='.'){
+				int n=Character.getNumericValue(x);
+				if(h.contains(n)){
+					cv=false;
+					break;
+				}else{
+					h.add(n);
+				}
+				}
+			j++;
+		}
+		j=0;
+		h.clear();
+		}
+	}
+	boolean both=false;
+	//3-3 grp validation
+	if(rv==true&&cv==true){
+		both=true; 
+	    for (int x = 0; x < 9; x++) {
+	        int p = x / 3;
+	        int q = x % 3;
+	        h.clear();
+	        for (int i = 3 * p; i < 3 * p + 3; i++) {
+	            for (int z = q * 3; z < q * 3 + 3; z++) {
+	                char c = al.get(z).charAt(i);
+	                
+	                if (c == '.')
+	                    continue;
+	                int n=Character.getNumericValue(c);
+	                if (h.contains(n))
+	                {
+	                	both=false;
+	                }
+	                h.add(n);
+	            }
+	        }
+	        
+	    }
+	    
+	}
+	
+	if(both==true)
+		return 1;
+	else
+		return 0;
+}
+}
